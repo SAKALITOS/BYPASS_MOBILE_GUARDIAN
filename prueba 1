@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuadro con Botones y Textbox</title>
+  <style>
+    /* Estilos para el recuadro */
+    #miRecuadro {
+      width: 500px;
+      height: 300px;
+      border: 4px solid #333;
+      padding: 20px;
+      text-align: left;
+      background-color: #000;
+      position: relative;
+    }
+
+    /* Estilos para el título */
+    #titulo {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #800080;
+    }
+
+    /* Estilos para el botón */
+    .miBoton {
+      position: absolute;
+      bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #botonEjecutar {
+      left: 10px;
+      background-color: #800080;
+      color: white;
+    }
+
+    #botonInyectar {
+      left: 120px;
+      background-color: #800080;
+      color: white;
+    }
+
+    #botonAjustes {
+      right: 10px;
+      bottom: 10px;
+      background-color: #800080;
+      color: white;
+    }
+
+    /* Estilos para la caja de texto */
+    #miTextbox {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 60%;
+      padding: 12px;
+      font-size: 14px;
+      border: 2px solid #333;
+      border-radius: 5px;
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    /* Estilos para el texto en la otra parte de la página */
+    #estadoTexto {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: red;
+      transition: color 1s;
+    }
+
+    /* Estilos para la ventana de error */
+    #ventanaError {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      width: 300px;
+      background-color: #333;
+      color: white;
+      border: 2px solid #111;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    /* Estilos para la ventana de ajustes */
+    #ventanaAjustes {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 40px;
+      width: 400px; /* Aumenté el ancho */
+      height: 250px; /* Aumenté la altura */
+      background-color: #000;
+      color: white;
+      border: 2px solid #333;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    #botonRegresar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #800080; /* Morado */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Recuadro con el título, los botones y la caja de texto -->
+<div id="miRecuadro">
+  <div id="titulo">NEBULA 1.0-mobile guardian</div>
+  <button id="botonEjecutar" class="miBoton" onclick="ejecutarCodigo()">Ejecutar</button>
+  <button id="botonInyectar" class="miBoton" onclick="inyectarAccion()">Inyectar</button>
+  <textarea id="miTextbox" placeholder="Escribe aquí"></textarea>
+  <div id="estadoTexto">Desactivado</div>
+  <button id="botonAjustes" class="miBoton" onclick="abrirAjustes()">Scripthub</button>
+</div>
+
+<!-- Ventana de error -->
+<div id="ventanaError">
+  <div id="titulo">Error</div>
+  <p>Por favor, inyecta antes de ejecutar.</p>
+  <button onclick="cerrarError()">Aceptar</button>
+</div>
+
+<!-- Ventana de ajustes -->
+<div id="ventanaAjustes">
+  <div id="titulo">Scripthub</div>
+  <!-- Contenido de ajustes (puedes personalizar según tus necesidades) -->
+  <button id="botonRegresar" onclick="cerrarAjustes()">Regresar</button>
+</div>
+
+<script>
+  var inyectado = false; // Variable para controlar si se ha inyectado
+
+  function ejecutarCodigo() {
+    if (inyectado) {
+      var codigo = document.getElementById("miTextbox").value;
+
+      try {
+        eval(codigo);
+      } catch (error) {
+        console.error('Error al ejecutar el código:', error);
+      }
+    } else {
+      // Mostrar ventana de error si no se ha inyectado
+      document.getElementById("ventanaError").style.display = "block";
+    }
+  }
+
+  function inyectarAccion() {
+    setTimeout(function() {
+      document.getElementById("estadoTexto").innerText = "Activado";
+      document.getElementById("estadoTexto").style.color = "green";
+      inyectado = true; // Marcar como inyectado
+    }, 2000);
+  }
+
+  function abrirAjustes() {
+    document.getElementById("ventanaAjustes").style.display = "flex";
+  }
+
+  function cerrarAjustes() {
+    document.getElementById("ventanaAjustes").style.display = "none";
+  }
+
+  function cerrarError() {
+    document.getElementById("ventanaError").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
