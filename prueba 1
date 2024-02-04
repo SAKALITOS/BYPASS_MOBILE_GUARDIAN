@@ -129,9 +129,51 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+    /* Estilos para el nuevo recuadro en ajustes */
+    #miNuevoRecuadro {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #800080;
+    }
+
+    /* Estilos para los nuevos botones en ajustes */
+    .miNuevoBoton {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #800080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    /* Estilos para el botón de cerrar ajustes */
+    #botonCerrarAjustes {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #800080; /* Morado */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+
+<!-- Saludo al usuario -->
+<p>NEBULA EXPLOIT</p>
+<p>Nebula1.0 exploit pasos</p>
+<p>entrar a un "about:blank"</p>
+<p>abrir las devvtols caja de herramientas y editar el body del about</p>
+<p>pegar lo siguiente: https://docs.google.com/document/d/1TEF-H295vjJ0P87uD-CqoCc9NJzHQPQQBdxHfuVaAXM/edit</p>
+<p>el texto quita esto y pega tu codigo aqui, sustituir por el enlace de la pagina de scripthub</p>
 
 <!-- Recuadro con el título, los botones y la caja de texto -->
 <div id="miRecuadro">
@@ -152,9 +194,17 @@
 
 <!-- Ventana de ajustes -->
 <div id="ventanaAjustes">
-  <div id="titulo">Scripthub</div>
-  <!-- Contenido de ajustes (puedes personalizar según tus necesidades) -->
-  <button id="botonRegresar" onclick="cerrarAjustes()">Regresar</button>
+  <!-- Botón para cerrar ajustes -->
+  <button id="botonCerrarAjustes" onclick="cerrarAjustes()">Cerrar</button>
+  <!-- Contenido de ajustes -->
+  <div id="miNuevoRecuadro">
+    <div id="titulo">NEBULA 1.0 MOBILE GUARDIAN</div>
+    <div id="botonesContainer">
+      <button class="miNuevoBoton" onclick="copiarCodigo('https://venge.io/')">Venge IO</button>
+      <button class="miNuevoBoton" onclick="copiarCodigo('https://www.minijuegos.com/')">Minijuegos</button>
+      <button class="miNuevoBoton" onclick="copiarCodigo('https://suikagame.com/')">Suika Game</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -194,6 +244,29 @@
   function cerrarError() {
     document.getElementById("ventanaError").style.display = "none";
   }
+
+  function copiarCodigo(codigo) {
+    // Verificar si se ha inyectado antes de copiar el código
+    if (inyectado) {
+      // Crear un elemento de texto temporal
+      var tempInput = document.createElement("textarea");
+      tempInput.value = codigo;
+      document.body.appendChild(tempInput);
+
+      // Seleccionar y copiar el texto
+      tempInput.select();
+      document.execCommand("copy");
+
+      // Eliminar el elemento temporal
+      document.body.removeChild(tempInput);
+
+      alert("Texto copiado: " + codigo);
+    } else {
+      // Mostrar ventana de error si no se ha inyectado
+      document.getElementById("ventanaError").style.display = "block";
+    }
+  }
+  
 </script>
 
 </body>
